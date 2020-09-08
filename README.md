@@ -14,7 +14,7 @@ A fully-functional e-commerce website implemented using React and Node.JS.
 
 
 # 1. Clone repo
-    $ git clone https://github.com/adityaharish/ecommerce.git
+    $ git clone https://github.com/nikhilmahala/TradeHood-website.git
 
 # 2. Run MongoDB
      open new terminal
