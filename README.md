@@ -22,7 +22,7 @@ A fully-functional e-commerce website implemented using React and Node.JS.
 
 # 3. Run Backend
       open new terminal
-     $ cd ecommerce
+     $ cd TradeHood-website
      $ npm install
      $ npm start
 
