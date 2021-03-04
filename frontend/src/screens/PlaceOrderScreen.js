@@ -1,11 +1,13 @@
 import React, { useEffect } from 'react';
-import { addToCart, removeFromCart } from '../actions/cartActions';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import CheckoutSteps from '../components/CheckoutSteps';
+import { createOrder } from '../actions/orderActions';
 function PlaceOrderScreen(props) {
 
   const cart = useSelector(state => state.cart);
+  const orderCreate = useSelector(state => state.orderCreate);
+  const { loading, success, error, order } = orderCreate;
 
   const { cartItems, shipping, payment } = cart;
   if (!shipping.address) {
@@ -22,14 +24,17 @@ function PlaceOrderScreen(props) {
 
   const placeOrderHandler = () => {
     // create an order
+    dispatch(createOrder({
+      orderItems: cartItems, shipping, payment, itemsPrice, shippingPrice,
+      taxPrice, totalPrice
+    }));
   }
   useEffect(() => {
+    if (success) {
+      props.history.push("/order/" + order._id);
+    }
 
-  }, []);
-
-  const checkoutHandler = () => {
-    props.history.push("/signin?redirect=shipping");
-  }
+  }, [success]);
 
   return <div>
     <CheckoutSteps step1 step2 step3 step4 ></CheckoutSteps>
@@ -83,7 +88,7 @@ function PlaceOrderScreen(props) {
                       </div>
                     </div>
                     <div className="cart-price">
-                      Rs {item.price}
+                      Rs{item.price}
                     </div>
                   </li>
                 )
@@ -91,7 +96,7 @@ function PlaceOrderScreen(props) {
           </ul>
         </div>
 
-
+      
       </div>
       <div className="placeorder-action">
         <ul>
@@ -103,19 +108,19 @@ function PlaceOrderScreen(props) {
           </li>
           <li>
             <div>Items</div>
-            <div>Rs {itemsPrice}</div>
+            <div>Rs{itemsPrice}</div>
           </li>
           <li>
             <div>Shipping</div>
-            <div>Rs {shippingPrice}</div>
+            <div>Rs{shippingPrice}</div>
           </li>
           <li>
             <div>Tax</div>
-            <div>Rs {taxPrice}</div>
+            <div>Rs{taxPrice}</div>
           </li>
           <li>
             <div>Order Total</div>
-            <div>Rs {totalPrice}</div>
+            <div>Rs{totalPrice}</div>
           </li>
         </ul>
 

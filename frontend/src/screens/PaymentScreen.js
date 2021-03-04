@@ -15,7 +15,8 @@ function PaymentScreen(props) {
     dispatch(savePayment({ paymentMethod }));
     props.history.push('placeorder');
   }
-  return <div>
+  return (
+    <div>
     <CheckoutSteps step1 step2 step3 ></CheckoutSteps>
     <div className="form">
       <form onSubmit={submitHandler} >
@@ -26,7 +27,11 @@ function PaymentScreen(props) {
 
           <li>
             <div>
-              <input type="radio" name="paymentMethod" id="paymentMethod" value="paytm"
+              <input 
+              type="radio" 
+              name="paymentMethod" 
+              id="paymentMethod" 
+              value="paytm"
                 onChange={(e) => setPaymentMethod(e.target.value)}>
               </input>
               <label htmlFor="paymentMethod">
@@ -54,6 +59,7 @@ function PaymentScreen(props) {
       </form>
     </div>
   </div>
+  );
 
 }
 export default PaymentScreen;
